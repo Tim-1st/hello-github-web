@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Démo Vif — Page HTML</title>
+
+  <!-- SEO/Partage -->
+  <meta name="description" content="Une page HTML rapide, responsive et animée." />
+  <meta property="og:title" content="Démo Vif — Page HTML" />
+  <meta property="og:description" content="Une page HTML rapide, responsive et animée." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.8em%22 font-size=%2290%22>⚡</text></svg>">
+
+  <style>
+    :root{
+      --bg: #0b0c10;
+      --card:#14161b;
+      --text:#eaf0f6;
+      --muted:#9aa4b2;
+      --brand:#6ae3ff;
+      --accent:#8dffb0;
+      --border:#22262e;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    :root.light{
+      --bg:#ffffff;
+      --card:#f6f8fb;
+      --text:#0e1320;
+      --muted:#5b6370;
+      --brand:#0066ff;
+      --accent:#00b87c;
+      --border:#e6e9f0;
+      --shadow: 0 10px 20px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+      color:var(--text);
+      background:radial-gradient(1200px 500px at 20% -10%, #1e2130 0%, transparent 60%) , var(--bg);
+      transition: background .4s ease,color .4s ease;
+    }
+
+    /* Layout */
+    header,main,footer{max-width:1100px;margin:auto;padding:20px}
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .logo{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo-badge{
+      width:36px;height:36px;border-radius:10px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--brand),var(--accent));
+      color:#000; font-weight:900; box-shadow:var(--shadow)
+    }
+    .actions{display:flex;gap:10px;align-items:center}
+    button, .button{
+      border:1px solid var(--border); background:var(--card); color:var(--text);
+      padding:10px 14px; border-radius:12px; cursor:pointer;
+      box-shadow: var(--shadow); transition: transform .08s ease, border-color .2s;
+    }
+    button:active{transform: translateY(1px)}
+    .primary{background:linear-gradient(135deg,var(--brand),var(--accent)); color:#001019; border:none}
+
+    /* Hero */
+    .hero{
+      margin-top:8px; display:grid; gap:18px;
+      grid-template-columns: 1.2fr .8fr;
+    }
+    @media (max-width: 900px){ .hero{grid-template-columns:1fr} }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.02)) , var(--card);
+      border:1px solid var(--border);
+      border-radius:18px; padding:22px; box-shadow:var(--shadow);
+    }
+    .title{font-size:clamp(28px,5vw,46px); line-height:1.1; margin:0}
+    .subtitle{margin:6px 0 0; color:var(--muted)}
+
+    /* Widget horloge */
+    .clock{
+      font-variant-numeric: tabular-nums; font-size: clamp(22px,4vw,34px);
+      display:flex; align-items:center; gap:10px;
+    }
+
+    /* Grille features */
+    .grid{
+      display:grid; gap:16px; grid-template-columns: repeat(3,1fr); margin-top:18px;
+    }
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr 1fr} }
+    @media (max-width: 600px){ .grid{grid-template-columns:1fr} }
+
+    /* Formulaire */
+    form{display:grid; gap:12px}
+    label{font-weight:600}
+    input, textarea{
+      width:100%; padding:12px 14px; border-radius:12px;
+      border:1px solid var(--border); background: #0f1117; color:var(--text);
+    }
+    :root.light input, :root.light textarea{background:#fff}
+    .hint{color:var(--muted); font-size:14px}
+
+    /* Micro-anim */
+    .pulse{
+      display:inline-block; transform-origin:center;
+      animation:pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{ transform: scale(1) rotate(0) }
+      50%{ transform: scale(1.06) rotate(-1deg) }
+    }
+
+    /* Footer */
+    footer{color:var(--muted); text-align:center; padding-bottom:40px}
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo" aria-label="Logo du site">
+      <div class="logo-badge" aria-hidden="true">⚡</div>
+      <span>Démo <span class="pulse">Vif</span></span>
+    </div>
+    <div class="actions">
+      <button id="themeToggle" title="Basculer clair/sombre" aria-pressed="false">🌙&nbsp;Thème</button>
+      <a class="button primary" href="#contact">Me contacter</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="t-hero">
+      <div class="card">
+        <h1 id="t-hero" class="title">Une base HTML <span class="pulse">rapide</span> & responsive</h1>
+        <p class="subtitle">Copie-colle, modifie, déploie. Inclus&nbsp;: thème clair/sombre, horloge en temps réel, animations subtiles, et un mini formulaire accessible.</p>
+        <div class="clock" role="status" aria-live="polite">
+          <span>🕒</span>
+          <span>Heure locale&nbsp;:</span>
+          <strong id="clock">--:--:--</strong>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>⚡ Performance</h3>
+            <p>Pas de frameworks, pas d’assets externes. Pur HTML/CSS/JS.</p>
+          </div>
+          <div class="card">
+            <h3>🌓 Thème</h3>
+            <p>Basculer clair/sombre, mémorisé dans <code>localStorage</code>.</p>
+          </div>
+          <div class="card">
+            <h3>♿ Accessibilité</h3>
+            <p>Balises sémantiques, contrastes, <em>aria-live</em> pour l’horloge.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h2>Contact rapide</h2>
+        <form id="contact" novalidate>
+          <div>
+            <label for="name">Nom</label>
+            <input id="name" name="name" autocomplete="name" placeholder="Ex. Alex Martin" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="vous@exemple.com" required />
+            <p class="hint">Nous ne partagerons jamais votre adresse.</p>
+          </div>
+          <div>
+            <label for="msg">Message</label>
+            <textarea id="msg" name="msg" rows="4" placeholder="Votre message…" required></textarea>
+          </div>
+          <button class="primary" type="submit">Envoyer</button>
+          <p id="feedback" class="hint" role="alert" style="display:none;margin:0"></p>
+        </form>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    Fait avec ❤️ — <a href="#" rel="nofollow">docs</a> • <a href="#" rel="nofollow">github</a>
+  </footer>
+
+  <script>
+    // --- Thème clair/sombre (préférence + toggle) ---
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+    function applyTheme(mode){
+      root.classList.toggle('light', mode === 'light');
+      themeToggle.setAttribute('aria-pressed', mode === 'dark' ? 'false' : 'true');
+    }
+    applyTheme(saved || (systemPrefersLight ? 'light' : 'dark'));
+
+    themeToggle.addEventListener('click', () => {
+      const isLight = root.classList.contains('light');
+      const next = isLight ? 'dark' : 'light';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    });
+
+    // --- Horloge en temps réel ---
+    const clockEl = document.getElementById('clock');
+    const format2 = n => String(n).padStart(2,'0');
+    function tick(){
+      const d = new Date();
+      const t = `${format2(d.getHours())}:${format2(d.getMinutes())}:${format2(d.getSeconds())}`;
+      clockEl.textContent = t;
+    }
+    tick(); setInterval(tick, 1000);
+
+    // --- Validation simple du formulaire ---
+    const form = document.getElementById('contact');
+    const feedback = document.getElementById('feedback');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = data.get('name')?.toString().trim();
+      const email = data.get('email')?.toString().trim();
+      const msg = data.get('msg')?.toString().trim();
+
+      let errors = [];
+      if(!name) errors.push('le nom');
+      if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push('un email valide');
+      if(!msg) errors.push('le message');
+
+      if(errors.length){
+        feedback.style.display = 'block';
+        feedback.style.color = 'crimson';
+        feedback.textContent = `Merci de renseigner ${errors.join(', ')}.`;
+        return;
+      }
+      feedback.style.display = 'block';
+      feedback.style.color = 'green';
+      feedback.textContent = '✅ Message prêt à être envoyé (simulation).';
+      form.reset();
+    }, false);
+  </script>
+</body>
+</html>
